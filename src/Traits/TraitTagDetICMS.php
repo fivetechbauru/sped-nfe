@@ -91,7 +91,9 @@ trait TraitTagDetICMS
         ];
         $std = $this->equilizeParameters($std, $possible);
         $identificador = "N01 ICMSxx Item: $std->item -";
-        $this->indDeduzDeson = $std->indDeduzDeson ?? 0;
+        if (isset($std->indDeduzDeson)) {
+            $this->indDeduzDeson = $std->indDeduzDeson ?? 0;
+        }
         $icms = null;
         switch ($std->CST) {
             case '00':
