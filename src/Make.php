@@ -6,40 +6,39 @@ use NFePHP\Common\DOMImproved as Dom;
 use NFePHP\Common\Strings;
 use NFePHP\NFe\Traits\TraitCalculations;
 use NFePHP\NFe\Traits\TraitTagAgropecuario;
+use NFePHP\NFe\Traits\TraitTagAutXml;
 use NFePHP\NFe\Traits\TraitTagCana;
+use NFePHP\NFe\Traits\TraitTagCobr;
 use NFePHP\NFe\Traits\TraitTagComb;
 use NFePHP\NFe\Traits\TraitTagCompra;
+use NFePHP\NFe\Traits\TraitTagDest;
 use NFePHP\NFe\Traits\TraitTagDet;
 use NFePHP\NFe\Traits\TraitTagDetCOFINS;
+use NFePHP\NFe\Traits\TraitTagDetIBSCBS;
+use NFePHP\NFe\Traits\TraitTagDetICMS;
 use NFePHP\NFe\Traits\TraitTagDetII;
 use NFePHP\NFe\Traits\TraitTagDetImposto;
-use NFePHP\NFe\Traits\TraitTagDetICMS;
 use NFePHP\NFe\Traits\TraitTagDetIPI;
+use NFePHP\NFe\Traits\TraitTagDetIS;
 use NFePHP\NFe\Traits\TraitTagDetISSQN;
 use NFePHP\NFe\Traits\TraitTagDetOptions;
 use NFePHP\NFe\Traits\TraitTagDetPIS;
+use NFePHP\NFe\Traits\TraitTagEmit;
+use NFePHP\NFe\Traits\TraitTagEntrega;
 use NFePHP\NFe\Traits\TraitTagExporta;
 use NFePHP\NFe\Traits\TraitTagGCompraGov;
-use NFePHP\NFe\Traits\TraitTagDetIBSCBS;
 use NFePHP\NFe\Traits\TraitTagGPagAntecipado;
-use NFePHP\NFe\Traits\TraitTagInfAdic;
-use NFePHP\NFe\Traits\TraitTagAutXml;
-use NFePHP\NFe\Traits\TraitTagCobr;
-use NFePHP\NFe\Traits\TraitTagEntrega;
 use NFePHP\NFe\Traits\TraitTagIde;
+use NFePHP\NFe\Traits\TraitTagInfAdic;
 use NFePHP\NFe\Traits\TraitTagInfIntermed;
 use NFePHP\NFe\Traits\TraitTagInfNfe;
-use NFePHP\NFe\Traits\TraitTagEmit;
 use NFePHP\NFe\Traits\TraitTagInfRespTec;
-use NFePHP\NFe\Traits\TraitTagDetIS;
 use NFePHP\NFe\Traits\TraitTagPag;
 use NFePHP\NFe\Traits\TraitTagRefs;
-use NFePHP\NFe\Traits\TraitTagDest;
 use NFePHP\NFe\Traits\TraitTagRetirada;
 use NFePHP\NFe\Traits\TraitTagTotal;
 use NFePHP\NFe\Traits\TraitTagTransp;
 use stdClass;
-use DOMElement;
 
 final class Make
 {
@@ -79,10 +78,10 @@ final class Make
     use TraitTagTotal;
     use TraitCalculations;
 
-    public const METHOD_CALCULATION_V1 = 1; //by values, calculate vItem and vNFTot
-    public const METHOD_CALCULATION_V2 = 2; //by tags, calculate vItem and vNFTot
+    public const METHOD_CALCULATION_V1 = 1; // by values, calculate vItem and vNFTot
+    public const METHOD_CALCULATION_V2 = 2; // by tags, calculate vItem and vNFTot
 
-    protected int $schema; //esta propriedade da classe estabelece qual é a versão do schema sendo considerado
+    protected int $schema; // esta propriedade da classe estabelece qual é a versão do schema sendo considerado
     protected int $tpAmb = 2;
     protected int $crt;
     public array $errors = [];
@@ -100,43 +99,43 @@ final class Make
     protected bool $checkgtin = false;
     protected bool $replaceAccentedChars = false;
     public Dom $dom;
-    public stdClass $stdTot;
+    public \stdClass $stdTot;
     protected array $dataICMSTot;
-    protected stdClass $stdISSQNTot;
-    protected stdClass $stdIStot;
-    protected stdClass $stdIBSCBSTot;
-    protected DOMElement $NFe;
-    protected DOMElement $infNFe;
-    protected DOMElement $ide;
-    protected ?DOMElement $gCompraGov;
-    protected ?DOMElement $gPagAntecipado;
-    protected DOMElement $emit;
-    protected DOMElement $enderEmit;
-    protected DOMElement $dest;
-    protected ?DOMElement $enderDest;
-    protected ?DOMElement $retirada;
-    protected ?DOMElement $entrega;
-    protected ?DOMElement $infAdic;
-    protected ?DOMElement $infRespTec;
-    protected ?DOMElement $cobr;
-    protected DOMElement $pag;
-    protected ?DOMElement $transp;
-    protected ?DOMElement $transporta;
-    protected ?DOMElement $retTransp;
-    protected ?DOMElement $veicTransp;
-    protected ?DOMElement $compra;
-    protected ?DOMElement $exporta;
-    protected ?DOMElement $balsa;
-    protected ?DOMElement $vagao;
-    protected DOMElement $ICMSTot;
-    protected ?DOMElement $ISSQNTot;
-    protected ?DOMElement $ISTot;
-    protected ?DOMElement $IBSCBSTot;
-    protected ?DOMElement $retTrib;
-    protected ?DOMElement $infIntermed;
-    protected ?DOMElement $agropecuarioGuia; //Não Existe na PL_010
-    protected ?DOMElement $cana;
-    protected ?DOMElement $infNFeSupl;
+    protected \stdClass $stdISSQNTot;
+    protected \stdClass $stdIStot;
+    protected \stdClass $stdIBSCBSTot;
+    protected \DOMElement $NFe;
+    protected \DOMElement $infNFe;
+    protected \DOMElement $ide;
+    protected ?\DOMElement $gCompraGov;
+    protected ?\DOMElement $gPagAntecipado;
+    protected \DOMElement $emit;
+    protected \DOMElement $enderEmit;
+    protected \DOMElement $dest;
+    protected ?\DOMElement $enderDest;
+    protected ?\DOMElement $retirada;
+    protected ?\DOMElement $entrega;
+    protected ?\DOMElement $infAdic;
+    protected ?\DOMElement $infRespTec;
+    protected ?\DOMElement $cobr;
+    protected \DOMElement $pag;
+    protected ?\DOMElement $transp;
+    protected ?\DOMElement $transporta;
+    protected ?\DOMElement $retTransp;
+    protected ?\DOMElement $veicTransp;
+    protected ?\DOMElement $compra;
+    protected ?\DOMElement $exporta;
+    protected ?\DOMElement $balsa;
+    protected ?\DOMElement $vagao;
+    protected \DOMElement $ICMSTot;
+    protected ?\DOMElement $ISSQNTot;
+    protected ?\DOMElement $ISTot;
+    protected ?\DOMElement $IBSCBSTot;
+    protected ?\DOMElement $retTrib;
+    protected ?\DOMElement $infIntermed;
+    protected ?\DOMElement $agropecuarioGuia; // Não Existe na PL_010
+    protected ?\DOMElement $cana;
+    protected ?\DOMElement $infNFeSupl;
     protected array $aReboque = [];
     protected array $aVol = [];
     protected array $aLacre = [];
@@ -196,19 +195,19 @@ final class Make
 
     /**
      * Função construtora cria um objeto DOMDocument
-     * que será carregado com o documento fiscal
+     * que será carregado com o documento fiscal.
      */
     public function __construct($schema = null)
     {
-        $this->schema = 9; //PL_009_V4
+        $this->schema = 9; // PL_009_V4
         if (!empty($schema)) {
-            $this->schema = (int)preg_replace("/[^0-9]/", "", substr($schema, 0, 6));
+            $this->schema = (int) preg_replace('/[^0-9]/', '', substr($schema, 0, 6));
         }
         $this->dom = new Dom('1.0', 'UTF-8');
         $this->dom->preserveWhiteSpace = false;
         $this->dom->formatOutput = false;
 
-        //elemento de calculo do vItem
+        // elemento de calculo do vItem
         $this->aVItemStruct = [
             'indTot' => 0,
             'vProd' => 0,
@@ -239,8 +238,8 @@ final class Make
             'vItem',
             'vItemCalculated',
         ];
-        //elemento totalizador
-        $this->stdTot = new stdClass();
+        // elemento totalizador
+        $this->stdTot = new \stdClass();
         $this->stdTot->vBC = 0;
         $this->stdTot->vICMS = 0;
         $this->stdTot->vICMSDeson = 0;
@@ -277,14 +276,14 @@ final class Make
         $this->stdTot->vRetCSLL = 0;
         $this->stdTot->vRetIRRF = 0;
         $this->stdTot->vRetPrev = 0;
-        //PL_010 IBS CBS vNFTot
+        // PL_010 IBS CBS vNFTot
         $this->stdTot->vIBS = 0;
         $this->stdTot->vCBS = 0;
         $this->stdTot->vIS = 0;
         $this->stdTot->vNFTot = null;
         $this->stdTot->vNFTotCalculated = null;
-        //ISSQN
-        $this->stdISSQNTot = new stdClass();
+        // ISSQN
+        $this->stdISSQNTot = new \stdClass();
         $this->stdISSQNTot->vServ = 0;
         $this->stdISSQNTot->vBC = 0;
         $this->stdISSQNTot->vISS = 0;
@@ -297,36 +296,36 @@ final class Make
         $this->stdISSQNTot->vDescCond = 0;
         $this->stdISSQNTot->vISSRet = 0;
         $this->stdISSQNTot->cRegTrib = null;
-        //IS
-        $this->stdIStot = new stdClass();
+        // IS
+        $this->stdIStot = new \stdClass();
         $this->stdIStot->vIS = 0;
-        //IBSCBS
-        $this->stdIBSCBSTot = new stdClass();
+        // IBSCBS
+        $this->stdIBSCBSTot = new \stdClass();
         $this->stdIBSCBSTot->vBCIBSCBS = 0;
         $this->stdIBSCBSTot->vIBS = 0;
         $this->stdIBSCBSTot->vCBS = 0;
 
-        $this->stdIBSCBSTot->gIBSUF = new stdClass();
+        $this->stdIBSCBSTot->gIBSUF = new \stdClass();
         $this->stdIBSCBSTot->gIBSUF->vDif = 0;
         $this->stdIBSCBSTot->gIBSUF->vDevTrib = 0;
         $this->stdIBSCBSTot->gIBSUF->vIBSUF = 0;
 
-        $this->stdIBSCBSTot->gIBSMun = new stdClass();
+        $this->stdIBSCBSTot->gIBSMun = new \stdClass();
         $this->stdIBSCBSTot->gIBSMun->vDif = 0;
         $this->stdIBSCBSTot->gIBSMun->vDevTrib = 0;
         $this->stdIBSCBSTot->gIBSMun->vIBSMun = 0;
 
-        $this->stdIBSCBSTot->gIBS = new stdClass();
+        $this->stdIBSCBSTot->gIBS = new \stdClass();
         $this->stdIBSCBSTot->gIBS->vCredPres = 0;
         $this->stdIBSCBSTot->gIBS->vCredPresCondSus = 0;
 
-        $this->stdIBSCBSTot->gCBS = new stdClass();
+        $this->stdIBSCBSTot->gCBS = new \stdClass();
         $this->stdIBSCBSTot->gCBS->vDif = 0;
         $this->stdIBSCBSTot->gCBS->vDevTrib = 0;
         $this->stdIBSCBSTot->gCBS->vCredPres = 0;
         $this->stdIBSCBSTot->gCBS->vCredPresCondSus = 0;
 
-        $this->stdIBSCBSTot->gMono = new stdClass();
+        $this->stdIBSCBSTot->gMono = new \stdClass();
         $this->stdIBSCBSTot->gMono->vIBSMono = 0;
         $this->stdIBSCBSTot->gMono->vCBSMono = 0;
         $this->stdIBSCBSTot->gMono->vIBSMonoReten = 0;
@@ -334,24 +333,25 @@ final class Make
         $this->stdIBSCBSTot->gMono->vIBSMonoRet = 0;
         $this->stdIBSCBSTot->gMono->vCBSMonoRet = 0;
 
-        $this->stdIBSCBSTot->gEstornoCred = new stdClass();
+        $this->stdIBSCBSTot->gEstornoCred = new \stdClass();
         $this->stdIBSCBSTot->gEstornoCred->vIBSEstCred = 0;
         $this->stdIBSCBSTot->gEstornoCred->vCBSEstCred = 0;
     }
 
     /**
-     * Returns xml string and assembly it is necessary
+     * Returns xml string and assembly it is necessary.
      */
     public function getXML(): string
     {
         if (empty($this->xml)) {
             $this->render();
         }
+
         return $this->xml;
     }
 
     /**
-     * Retorns the key number of NFe (44 digits)
+     * Retorns the key number of NFe (44 digits).
      */
     public function getChave(): string
     {
@@ -359,18 +359,18 @@ final class Make
     }
 
     /**
-     * Returns the model of NFe 55 or 65
+     * Returns the model of NFe 55 or 65.
      */
     public function getModelo(): int
     {
-        return (int)$this->mod;
+        return (int) $this->mod;
     }
 
     /**
      * Seleciona o forma de calculo do valor de vItem e do valor de VNFTot
      * METHOD_CALCULATION_V1 = usa os valores recolhidos durante a entrada de dados
-     * METHOD_CALCULATION_V1 = obtem os valores das tags já construidas dos itens
-     * @param int $method
+     * METHOD_CALCULATION_V1 = obtem os valores das tags já construidas dos itens.
+     *
      * @return void
      */
     public function setCalculationMethod(int $method = self::METHOD_CALCULATION_V2)
@@ -379,7 +379,7 @@ final class Make
     }
 
     /**
-     * Retorna os erros detectados
+     * Retorna os erros detectados.
      */
     public function getErrors(): array
     {
@@ -387,7 +387,7 @@ final class Make
     }
 
     /**
-     * Set character convertion to ASCII only ou not
+     * Set character convertion to ASCII only ou not.
      */
     public function setOnlyAscii(bool $option = false): void
     {
@@ -395,9 +395,7 @@ final class Make
     }
 
     /**
-     * Set if GTIN is or not validate
-     * @param bool $option
-     * @return void
+     * Set if GTIN is or not validate.
      */
     public function setCheckGtin(bool $option = true): void
     {
@@ -406,188 +404,188 @@ final class Make
 
     /**
      * Call method of xml assembly. For compatibility only.
-     * @return string
      */
     public function montaNFe(): string
     {
         return $this->render();
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         try {
-            //calcula totais e vNF
+            // calcula totais e vNF
             $this->buildTotalICMS();
-            //cria a tag NFe
+            // cria a tag NFe
             $this->buildNFe();
-            //tag NFref => tag ide
+            // tag NFref => tag ide
             $this->addTagRefToIde();
-            //tag gCompraGov => tag ide Existe apenas a partir da PL_010
+            // tag gCompraGov => tag ide Existe apenas a partir da PL_010
             if ($this->schema > 9) {
                 $this->addTag($this->ide, $this->gCompraGov ?? null, 'Falta a tag "ide"');
                 $this->addTag($this->ide, $this->gPagAntecipado ?? null, 'Falta a tag "ide"');
             }
-            //tag ide => tag infNfe
+            // tag ide => tag infNfe
             $this->addTag($this->infNFe, $this->ide ?? null, 'Falta a tag "infNFe"');
-            //tag emit => tag infNfe
+            // tag emit => tag infNfe
             $this->addTagEmit();
-            //tag dest => tag infNFe
+            // tag dest => tag infNFe
             $this->addTagDest();
-            //tag retirada  => tag infNFe
+            // tag retirada  => tag infNFe
             $this->addTag($this->infNFe, $this->retirada ?? null, 'Falta a tag "infNFe"');
-            //tag entrega => tag infNFe
+            // tag entrega => tag infNFe
             $this->addTag($this->infNFe, $this->entrega ?? null, 'Falta a tag "infNFe"');
-            //tag autXMl => tag infNFe
+            // tag autXMl => tag infNFe
             $this->addTagAutXML();
-            //tag det => tag infNFe
+            // tag det => tag infNFe
             $this->addTagDet();
-            //tag total => tag infNfe
+            // tag total => tag infNfe
             $this->addTagTotal();
 
-            //tag transp => tag infNfe
+            // tag transp => tag infNfe
             $this->addTagTransp();
-            //tag cobr => tag infNFe
+            // tag cobr => tag infNFe
             $this->addTag($this->infNFe, $this->cobr ?? null, 'Falta a tag "infNFe"');
-            //tag pag => tag infNFe
+            // tag pag => tag infNFe
             $this->addTagPag();
-            //tag infIntermed => tag infNFe
+            // tag infIntermed => tag infNFe
             $this->addTag($this->infNFe, $this->infIntermed ?? null, 'Falta a tag "infNFe"');
-            //tag infAdic => tag infNFe
+            // tag infAdic => tag infNFe
             $this->buildInfoTags();
             $this->addTag($this->infNFe, $this->infAdic ?? null, 'Falta a tag "infNFe"');
-            //tag exporta => tag infNFe
+            // tag exporta => tag infNFe
             $this->addTag($this->infNFe, $this->exporta ?? null, 'Falta a tag "infNFe"');
-            //tag compra => tag infNFe
+            // tag compra => tag infNFe
             $this->addTag($this->infNFe, $this->compra ?? null, 'Falta a tag "infNFe"');
-            //tag cana => tag infNFe
+            // tag cana => tag infNFe
             $this->addTagCana();
-            //tag infRespTec => tag infNFe
+            // tag infRespTec => tag infNFe
             $this->addTag($this->infNFe, $this->infRespTec ?? null, 'Falta a tag "infNFe"');
-            //Add tag agropecuario
+            // Add tag agropecuario
             $this->addTagAgropecuario();
-            //Add tag infNfe => tag NFe
+            // Add tag infNfe => tag NFe
             $this->addTag($this->NFe, $this->infNFe ?? null, 'Falta a tag "NFe"');
-            //Add tag NFe => XML
+            // Add tag NFe => XML
             $this->dom->appendChild($this->NFe);
             // testa cMunFGIBS
             // testa da chave e inclui ajustes na NFe (id e cDV)
             $this->checkNFeKey($this->dom);
-            //grava XML na propriedades da classe
+            // grava XML na propriedades da classe
             $this->xml = $this->dom->saveXML();
         } catch (\Exception $e) {
             $this->errors[] = $e->getMessage();
         }
-        //retorna o XML (sem assinatura)
+
+        // retorna o XML (sem assinatura)
         return $this->xml ?? '';
     }
 
     /**
-     * Monta e adiciona as tags det a tag infNFe
+     * Monta e adiciona as tags det a tag infNFe.
+     *
      * @return void
+     *
      * @throws \DOMException
      */
     protected function addTagDet()
     {
         if (empty($this->aProd)) {
             $this->errors[] = 'Falta a tag "prod"';
+
             return;
         }
         $this->aProd = array_slice($this->aProd, 0, 990, true);
-        //para cada tag prod
+        // para cada tag prod
         ksort($this->aProd);
         foreach ($this->aProd as $item => $prod) {
-            $det = $this->dom->createElement("det");
-            $det->setAttribute("nItem", $item);
-            //NVE => prod até 8 registros
+            $det = $this->dom->createElement('det');
+            $det->setAttribute('nItem', $item);
+            // NVE => prod até 8 registros
             if (!empty($this->aNVE[$item])) {
                 $nves = $this->aNVE[$item];
                 if (count($nves) > 8) {
                     $this->errors[] = "I05a <NVE> Item: $item - As tags NVE são limitadas a 8 repetições "
-                        . "por item da NFe";
+                        .'por item da NFe';
                     $nves = array_slice($nves, 0, 8);
                 }
-                $node = $prod->getElementsByTagName("NCM")->item(0);
+                $node = $prod->getElementsByTagName('NCM')->item(0);
                 foreach ($nves as $nve) {
                     $this->dom->insertAfter($nve, $node);
                 }
             }
-            //gCred => prod até 4 registros
+            // gCred => prod até 4 registros
             if (!empty($this->aGCred[$item])) {
                 $gcs = $this->aGCred[$item];
                 if (count($gcs) > 4) {
                     $this->errors[] = "<gCred> Item: $item - As tags gCred são limitadas a 4 "
-                        . "repetições por item da NFe";
+                        .'repetições por item da NFe';
                     $gbs = array_slice($gcs, 0, 4);
                 }
-                $node = $prod->getElementsByTagName("EXTIPI")->item(0);
+                $node = $prod->getElementsByTagName('EXTIPI')->item(0);
                 if (empty($node)) {
-                    $node = $prod->getElementsByTagName("CFOP")->item(0);
+                    $node = $prod->getElementsByTagName('CFOP')->item(0);
                 }
                 foreach ($gcs as $gc) {
                     $prod->insertBefore($gc, $node);
                 }
             }
-            //CEST => prod
-            $cest = $prod->getElementsByTagName("CEST")->item(0)->nodeValue ?? null;
+            // CEST => prod
+            $cest = $prod->getElementsByTagName('CEST')->item(0)->nodeValue ?? null;
             if (!empty($this->aCest[$item]) && empty($cest)) {
-                //não tem CEST no item produto, mas tem no array de $this->>aCest
+                // não tem CEST no item produto, mas tem no array de $this->>aCest
                 $cest = $this->aCest[$item];
-                $codigo = $cest->getElementsByTagName("CEST")->item(0)->nodeValue ?? null;
-                $cBenef = $cest->getElementsByTagName("cBenef")->item(0)->nodeValue ?? null;
-                $CNPJFab = $cest->getElementsByTagName("CNPJFab")->item(0)->nodeValue ?? null;
-                $indEscala = $cest->getElementsByTagName("indEscala")->item(0)->nodeValue ?? null;
-                $node = $prod->getElementsByTagName("gCred")->item(0) ?? null;
+                $codigo = $cest->getElementsByTagName('CEST')->item(0)->nodeValue ?? null;
+                $cBenef = $cest->getElementsByTagName('cBenef')->item(0)->nodeValue ?? null;
+                $CNPJFab = $cest->getElementsByTagName('CNPJFab')->item(0)->nodeValue ?? null;
+                $indEscala = $cest->getElementsByTagName('indEscala')->item(0)->nodeValue ?? null;
+                $node = $prod->getElementsByTagName('gCred')->item(0) ?? null;
                 if (empty($node)) {
-                    $node = $prod->getElementsByTagName("tpCredPresIBSZFM")->item(0) ?? null;
+                    $node = $prod->getElementsByTagName('tpCredPresIBSZFM')->item(0) ?? null;
                     if (empty($node)) {
-                        $node = $prod->getElementsByTagName("EXTIPI")->item(0) ?? null;
+                        $node = $prod->getElementsByTagName('EXTIPI')->item(0) ?? null;
                     }
                     if (empty($node)) {
-                        $node = $prod->getElementsByTagName("CFOP")->item(0) ?? null;
+                        $node = $prod->getElementsByTagName('CFOP')->item(0) ?? null;
                     }
                 }
                 if (!empty($codigo)) {
-                    $child = $this->dom->createElement("CEST", $codigo);
+                    $child = $this->dom->createElement('CEST', $codigo);
                     $prod->insertBefore($child, $node);
                 }
                 if (!empty($indEscala)) {
-                    $child = $this->dom->createElement("indEscala", $indEscala);
+                    $child = $this->dom->createElement('indEscala', $indEscala);
                     $prod->insertBefore($child, $node);
                 }
                 if (!empty($CNPJFab)) {
-                    $child = $this->dom->createElement("CNPJFab", $CNPJFab);
+                    $child = $this->dom->createElement('CNPJFab', $CNPJFab);
                     $prod->insertBefore($child, $node);
                 }
                 if (!empty($cBenef)) {
-                    $child = $this->dom->createElement("cBenef", $cBenef);
+                    $child = $this->dom->createElement('cBenef', $cBenef);
                     $prod->insertBefore($child, $node);
                 }
             }
-            //DI => prod
+            // DI => prod
             if (!empty($this->aDI[$item])) {
-                $ind = $prod->getElementsByTagName("indBemMovelUsado")->item(0) ?? null;
+                $ind = $prod->getElementsByTagName('indBemMovelUsado')->item(0) ?? null;
                 if (empty($ind)) {
-                    $ind = $prod->getElementsByTagName("indTot")->item(0);
+                    $ind = $prod->getElementsByTagName('indTot')->item(0);
                 }
                 $dis = $this->aDI[$item];
                 if (count($dis) > 100) {
                     $this->errors[] = "I18 <DI> Item: $item - As tags DI estão limitadas a 100 registros "
-                        . "por item da NFe";
+                        .'por item da NFe';
                     $dis = array_slice($dis, 0, 100, true);
                 }
                 foreach ($dis as $di) {
-                    $nDI = $di->getElementsByTagName("nDI")->item(0)->nodeValue ?? 0;
-                    //adi => DI
+                    $nDI = $di->getElementsByTagName('nDI')->item(0)->nodeValue ?? 0;
+                    // adi => DI
                     $adis = $this->aAdi[$item][$nDI];
                     if (empty($adis)) {
                         $this->errors[] = "I18 <DI> N. $nDI Item: $item - Deve existir pelo menos uma adi por DI.";
                     }
                     if (count($adis) > 999) {
                         $this->errors[] = "I18 <DI> N. $nDI Item: $item - As tags adi estão limitadas "
-                            . "à até 999 por DI.";
+                            .'à até 999 por DI.';
                         $adis = array_slice($adis, 0, 999, true);
                     }
                     foreach ($adis as $adi) {
@@ -596,55 +594,55 @@ final class Make
                     $this->dom->insertAfter($di, $ind);
                 }
             }
-            //detExport => prod
+            // detExport => prod
             if (!empty($this->aDetExport[$item])) {
-                $node = $prod->getElementsByTagName("xPed")->item(0);
+                $node = $prod->getElementsByTagName('xPed')->item(0);
                 if (empty($node)) {
-                    $node = $prod->getElementsByTagName("nItemPed")->item(0);
+                    $node = $prod->getElementsByTagName('nItemPed')->item(0);
                     if (empty($node)) {
-                        $node = $prod->getElementsByTagName("nFCI")->item(0);
+                        $node = $prod->getElementsByTagName('nFCI')->item(0);
                     }
                 }
                 $dex = $this->aDetExport[$item];
                 if (count($dex) > 500) {
                     $this->errors[] = "I50 <detExport> Item: $item - As tags detExpot estão limitadas "
-                        . "à até 500 por item.";
+                        .'à até 500 por item.';
                     $dex = array_slice($dex, 0, 500, true);
                 }
                 foreach ($dex as $d) {
                     $prod->insertBefore($d, $node);
                 }
             }
-            //rastro => prod
+            // rastro => prod
             if (!empty($this->aRastro[$item])) {
                 $ras = $this->aRastro[$item];
                 if (count($ras) > 500) {
                     $this->errors[] = "I80 <rastro> Item: $item - As tags rastro estão limitadas "
-                        . "à até 500 por item.";
+                        .'à até 500 por item.';
                     $ras = array_slice($ras, 0, 500, true);
                 }
                 foreach ($ras as $ra) {
                     $this->addTag($prod, $ra, 'Falta tag prod!');
                 }
             }
-            //CHOICE
+            // CHOICE
             $flagChoice = false;
-            //veicProd => prod
+            // veicProd => prod
             if (!empty($this->aVeicProd[$item]) && $flagChoice === false) {
                 $this->addTag($prod, $this->aVeicProd[$item], 'Falta tag prod!');
                 $flagChoice = true;
             }
-            //med => prod
+            // med => prod
             if (!empty($this->aMed[$item]) && $flagChoice === false) {
                 $this->addTag($prod, $this->aMed[$item], 'Falta tag prod!');
                 $flagChoice = true;
             }
-            //arma => prod
+            // arma => prod
             if (!empty($this->aArma[$item]) && $flagChoice === false) {
                 $arms = $this->aArma[$item];
                 if (count($arms) > 500) {
                     $this->errors[] = "L01 <arma> Item: $item - As tags arma estão limitadas "
-                        . "à até 500 por item.";
+                        .'à até 500 por item.';
                     $ras = array_slice($arms, 0, 500, true);
                 }
                 foreach ($arms as $arm) {
@@ -652,13 +650,13 @@ final class Make
                 }
                 $flagChoice = true;
             }
-            //comb => prod
+            // comb => prod
             if (!empty($this->aComb[$item]) && $flagChoice === false) {
                 $comb = $this->aComb[$item];
                 if (!empty($this->aEncerrante)) {
                     $encerrante = $this->aEncerrante[$item];
                     if (!empty($encerrante)) {
-                        $pbio = $comb->getElementsByTagName("pBio")->item(0);
+                        $pbio = $comb->getElementsByTagName('pBio')->item(0);
                         if (!empty($pbio)) {
                             $comb->insertBefore($encerrante, $pbio);
                         } else {
@@ -666,7 +664,7 @@ final class Make
                         }
                     }
                 }
-                //incluso NT 2023.001-1.10 /1.20
+                // incluso NT 2023.001-1.10 /1.20
                 if (!empty($this->aOrigComb[$item])) {
                     foreach ($this->aOrigComb[$item] as $origcomb) {
                         $this->addTag($comb, $origcomb, 'Falta a tag comb!');
@@ -675,20 +673,20 @@ final class Make
                 $this->addTag($prod, $this->aComb[$item]);
                 $flagChoice = true;
             }
-            //RECOPI => prod
+            // RECOPI => prod
             if (!empty($this->aRECOPI[$item]) && $flagChoice === false) {
                 $prod->appendChild($this->aRECOPI[$item]);
             }
             $this->addTag($det, $prod, 'Falta a tag det!');
 
-            //imposto => det
-            $imposto = $this->dom->createElement("imposto");
+            // imposto => det
+            $imposto = $this->dom->createElement('imposto');
             if (!empty($this->aImposto[$item])) {
                 $imposto = $this->aImposto[$item];
             }
-            //ICMS => imposto
+            // ICMS => imposto
             $flagICMS = false;
-            $icms = $this->dom->createElement("ICMS");
+            $icms = $this->dom->createElement('ICMS');
             if (!empty($this->aICMS[$item])) {
                 $flagICMS = true;
                 $this->addTag($icms, $this->aICMS[$item]);
@@ -705,78 +703,78 @@ final class Make
             if ($flagICMS) {
                 $this->addTag($imposto, $icms, 'Falta a tag det/imposto!');
             }
-            //IPI => imposto
+            // IPI => imposto
             if (!empty($this->aIPI[$item])) {
                 $this->addTag($imposto, $this->aIPI[$item], 'Falta a tag det/imposto!');
             }
-            //II => imposto
+            // II => imposto
             if (!empty($this->aII[$item])) {
                 $this->addTag($imposto, $this->aII[$item], 'Falta a tag det/imposto!');
             }
-            //ISSQN => imposto
+            // ISSQN => imposto
             if (!empty($this->aISSQN[$item]) && !$flagICMS) {
-                //ou temos ISSQN ou temos ICMS não podemos ter os dois no mesmo item
+                // ou temos ISSQN ou temos ICMS não podemos ter os dois no mesmo item
                 $this->addTag($imposto, $this->aISSQN[$item], 'Falta a tag det/imposto!');
             }
-            //PIS => imposto
+            // PIS => imposto
             if (!empty($this->aPIS[$item])) {
                 $this->addTag($imposto, $this->aPIS[$item], 'Falta a tag det/imposto!');
             }
-            //PISST => imposto
+            // PISST => imposto
             if (!empty($this->aPISST[$item]) && empty($this->aPIS[$item])) {
-                //ou o PIS normal ou PISST não pode haver os dois no mesmo item
+                // ou o PIS normal ou PISST não pode haver os dois no mesmo item
                 $this->addTag($imposto, $this->aPISST[$item], 'Falta a tag det/imposto!');
             }
-            //COFINS => imposto
+            // COFINS => imposto
             if (!empty($this->aCOFINS[$item])) {
                 $this->addTag($imposto, $this->aCOFINS[$item], 'Falta a tag det/imposto!');
             }
-            //COFINSST => imposto
+            // COFINSST => imposto
             if (!empty($this->aCOFINSST[$item]) && empty($this->aCOFINS[$item])) {
-                //ou o COFINS normal ou CONFINSST não pode haver os dois no mesmo item
+                // ou o COFINS normal ou CONFINSST não pode haver os dois no mesmo item
                 $this->addTag($imposto, $this->aCOFINSST[$item], 'Falta a tag det/imposto!');
             }
-            //ICMSUFDest => imposto
+            // ICMSUFDest => imposto
             if (!empty($this->aICMSUFDest[$item])) {
                 $this->addTag($imposto, $this->aICMSUFDest[$item], 'Falta a tag det/imposto!');
             }
             if ($this->schema > 9) {
-                //IS => imposto - somente para PL_010 em diante
+                // IS => imposto - somente para PL_010 em diante
                 if (!empty($this->aIS[$item])) {
                     $this->addTag($imposto, $this->aIS[$item], 'Falta a tag det/imposto!');
                 }
-                //IBSCBS => imposto - somente para PL_010 em diante
+                // IBSCBS => imposto - somente para PL_010 em diante
                 if (!empty($this->aIBSCBS[$item])) {
                     $ibscbs = $this->aIBSCBS[$item];
-                    //existe o grupo gIBSCBS no node IBSCBS ?
-                    $gIBSCBS = $ibscbs->getElementsByTagName("gIBSCBS")->item(0);
+                    // existe o grupo gIBSCBS no node IBSCBS ?
+                    $gIBSCBS = $ibscbs->getElementsByTagName('gIBSCBS')->item(0);
                     if (!empty($this->aGTribRegular[$item]) && !empty($gIBSCBS)) {
-                        //add gTribRegular
+                        // add gTribRegular
                         $gIBSCBS->appendChild($this->aGTribRegular[$item]);
                     }
                     if (!empty($this->aGTribCompraGov[$item]) && !empty($gIBSCBS)) {
                         $gIBSCBS->appendChild($this->aGTribCompraGov[$item]);
                     }
-                    //CHOICE gIBSCBS, gIBSCBSMono, gTranfCred, gAjusteCompet
-                    //existe o grupo gIBSCBS no node IBSCBS ?
+                    // CHOICE gIBSCBS, gIBSCBSMono, gTranfCred, gAjusteCompet
+                    // existe o grupo gIBSCBS no node IBSCBS ?
                     if (!empty($gIBSCBS)) {
-                        //add gIBSCBS ao node imposto
+                        // add gIBSCBS ao node imposto
                         $this->addTag($ibscbs, $gIBSCBS, 'Falta a tag IBSCBS!');
                     } elseif (!empty($this->aGIBSCBSMono[$item])) {
-                        //não existe gIBSCBS, então add gIBSCBSMono
+                        // não existe gIBSCBS, então add gIBSCBSMono
                         $this->addTag($ibscbs, $this->aGIBSCBSMono[$item], 'Falta a tag IBSCBS!');
                     } elseif (!empty($this->aGTransfCred[$item])) {
-                        //não existe gIBSCBS, nem gIBSCBSMono então add gTransfCred
+                        // não existe gIBSCBS, nem gIBSCBSMono então add gTransfCred
                         $this->addTag($ibscbs, $this->aGTransfCred[$item], 'Falta a tag IBSCBS!');
                     } elseif (!empty($this->aGAjusteCompet[$item])) {
-                        //não existe gIBSCBS, nem gIBSCBSMono, nem gTransfCred entao add gAjusteCompet
+                        // não existe gIBSCBS, nem gIBSCBSMono, nem gTransfCred entao add gAjusteCompet
                         $this->addTag($ibscbs, $this->aGAjusteCompet[$item], 'Falta a tag IBSCBS!');
                     }
-                    //gEstornoCred
+                    // gEstornoCred
                     if (!empty($this->aGEstornoCred[$item])) {
                         $this->addTag($ibscbs, $this->aGEstornoCred[$item], 'Falta a tag IBSCBS!');
                     }
-                    //gCredPresOper
+                    // gCredPresOper
                     if (!empty($this->aGCredPresOper[$item])) {
                         $this->addTag($ibscbs, $this->aGCredPresOper[$item], 'Falta a tag IBSCBS!');
                     } elseif (!empty($this->aGCredPresIBSZFM[$item])) {
@@ -785,33 +783,33 @@ final class Make
                     $this->addTag($imposto, $ibscbs, 'Falta a tag det/imposto!');
                 }
             }
-            //adiciona imposto ao node det
+            // adiciona imposto ao node det
             $this->addTag($det, $imposto);
-            //impostoDevol => det
+            // impostoDevol => det
             if (!empty($this->aImpostoDevol[$item])) {
                 $this->addTag($det, $this->aImpostoDevol[$item], 'Falta a tag det!');
             }
-            //infAdProd => det
+            // infAdProd => det
             if (!empty($this->aInfAdProd[$item])) {
                 $this->addTag($det, $this->aInfAdProd[$item], 'Falta a tag det!');
             }
-            //obsItem => det
+            // obsItem => det
             if (!empty($this->aObsItem[$item])) {
                 $this->addTag($det, $this->aObsItem[$item], 'Falta a tag det!');
             }
             if ($this->schema > 9) {
-                //calcula os valores de vItem para todos os itens da NF
+                // calcula os valores de vItem para todos os itens da NF
                 if ($this->calculationMethod == self::METHOD_CALCULATION_V1) {
                     $this->calculateTtensValues1();
                 } else {
                     $this->calculateTtensValues2($det);
                 }
                 if (!empty($this->aIBSCBS)) {
-                    //adiciona o vItem informado ou o calculado
+                    // adiciona o vItem informado ou o calculado
                     if (!empty($this->aVItem[$item]['vItem'])) {
                         $this->dom->addChild(
                             $det,
-                            "vItem",
+                            'vItem',
                             $this->conditionalNumberFormatting($this->aVItem[$item]['vItem']),
                             true,
                             "det nItem $item Valor Total do Item da NF-e"
@@ -819,14 +817,14 @@ final class Make
                     } else {
                         $this->dom->addChild(
                             $det,
-                            "vItem",
+                            'vItem',
                             $this->conditionalNumberFormatting($this->aVItem[$item]['vItemCalculated']),
                             true,
                             "det nItem $item Valor Total do Item da NF-e"
                         );
                     }
                 }
-                //DFEReferenciado => det PL_010
+                // DFEReferenciado => det PL_010
                 if (!empty($this->aDFeReferenciado[$item])) {
                     $this->addTag($det, $this->aDFeReferenciado[$item], 'Falta a tag det!');
                 }
@@ -837,11 +835,11 @@ final class Make
 
     /**
      * Grupo Totais da NF-e W01 pai A01
-     * tag NFe/infNFe/total
+     * tag NFe/infNFe/total.
      */
     protected function buildTotalICMS()
     {
-        //round all values
+        // round all values
         $this->stdTot->vBC = round($this->stdTot->vBC, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vICMS = round($this->stdTot->vICMS, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vICMSDeson = round($this->stdTot->vICMSDeson, 2, PHP_ROUND_HALF_UP);
@@ -868,7 +866,7 @@ final class Make
 
         $this->stdTot->vNF = $this->stdTot->vProd
             - $this->stdTot->vDesc
-            - $this->stdTot->vICMSDeson * $this->indDeduzDeson
+            - $this->stdTot->vICMSDeson
             + $this->stdTot->vST
             + $this->stdTot->vFCPST
             + $this->stdTot->vICMSMonoReten
@@ -881,33 +879,35 @@ final class Make
             + $this->stdISSQNTot->vServ
             + $this->stdTot->vPISST
             + $this->stdTot->vCOFINSST;
-            /*
-            - $this->stdTot->vRetPIS //subtrai as retenções
-            - $this->stdTot->vRetCOFINS  //subtrai as retenções
-            - $this->stdTot->vRetCSLL //subtrai as retenções
-            - $this->stdTot->vRetIRRF //subtrai as retenções
-            - $this->stdTot->vRetPrev; //subtrai as retenções
-            */
+        /*
+        - $this->stdTot->vRetPIS //subtrai as retenções
+        - $this->stdTot->vRetCOFINS  //subtrai as retenções
+        - $this->stdTot->vRetCSLL //subtrai as retenções
+        - $this->stdTot->vRetIRRF //subtrai as retenções
+        - $this->stdTot->vRetPrev; //subtrai as retenções
+        */
     }
 
     /**
      * Adiciona as tags NFref na tag ide
-     * NFref => tag ide
+     * NFref => tag ide.
+     *
      * @return void
      */
     protected function addTagRefToIde()
     {
         if (empty($this->ide)) {
             $this->errors[] = 'Falta a tag "ide"';
+
             return;
         }
         if (empty($this->aNFref)) {
             return;
         }
-        //[1] tags NFref
-        //processa NFref e coloca as tags na tag ide
+        // [1] tags NFref
+        // processa NFref e coloca as tags na tag ide
         if (count($this->aNFref) > 999) {
-            $this->errors[] = "Existe limite de no máximo 999 tags NFref";
+            $this->errors[] = 'Existe limite de no máximo 999 tags NFref';
             $this->aNFref = array_slice($this->aNFref, 0, 999);
         }
         foreach ($this->aNFref as $nfeRef) {
@@ -916,7 +916,8 @@ final class Make
     }
 
     /**
-     * Adiciona a tag emit na tag infNFe
+     * Adiciona a tag emit na tag infNFe.
+     *
      * @return void
      */
     protected function addTagEmit()
@@ -926,21 +927,23 @@ final class Make
         }
         if (empty($this->infNFe)) {
             $this->errors[] = 'Falta a tag "infNFe"';
+
             return;
         }
-        //[8] tag emit (C01)
-        //verifica se o endereço do emitente já existe na tag emit
+        // [8] tag emit (C01)
+        // verifica se o endereço do emitente já existe na tag emit
         $endemit = $this->emit->getElementsByTagName('enderEmit')->item(0);
         if (empty($endemit) && !empty($this->enderEmit) && !empty($this->emit)) {
-            //se enderEmit não estiver já inserido na tag emit, então inserir
-            $node = $this->emit->getElementsByTagName("IE")->item(0);
+            // se enderEmit não estiver já inserido na tag emit, então inserir
+            $node = $this->emit->getElementsByTagName('IE')->item(0);
             $this->emit->insertBefore($this->enderEmit, $node);
         }
         $this->dom->appChild($this->infNFe, $this->emit, '');
     }
 
     /**
-     * Adiciona a tag dest na tag infNFe
+     * Adiciona a tag dest na tag infNFe.
+     *
      * @return void
      */
     protected function addTagDest()
@@ -950,16 +953,17 @@ final class Make
         }
         if (empty($this->infNFe)) {
             $this->errors[] = 'Falta a tag "infNFe"';
+
             return;
         }
-        //verifica se o endereço do destinatário já existe na tag dest
+        // verifica se o endereço do destinatário já existe na tag dest
         $enddest = !empty($this->dest->getElementsByTagName('enderDest')->item(0))
             ? $this->dest->getElementsByTagName('enderDest')->item(0)
             : null;
         if (is_null($enddest) && !empty($this->enderDest)) {
-            $node = $this->dest->getElementsByTagName("indIEDest")->item(0);
+            $node = $this->dest->getElementsByTagName('indIEDest')->item(0);
             if (!isset($node)) {
-                $node = $this->dest->getElementsByTagName("IE")->item(0);
+                $node = $this->dest->getElementsByTagName('IE')->item(0);
             }
             $this->dest->insertBefore($this->enderDest, $node);
         }
@@ -967,7 +971,8 @@ final class Make
     }
 
     /**
-     * Adiciona as tags autXML na tag infNFe
+     * Adiciona as tags autXML na tag infNFe.
+     *
      * @return void
      */
     protected function addTagAutXML()
@@ -977,6 +982,7 @@ final class Make
         }
         if (empty($this->infNFe)) {
             $this->errors[] = 'Falta a tag "infNFe"';
+
             return;
         }
         foreach ($this->aAutXML as $aut) {
@@ -985,7 +991,8 @@ final class Make
     }
 
     /**
-     * Adiciona a tag transp na tag infNFe
+     * Adiciona a tag transp na tag infNFe.
+     *
      * @return void
      */
     protected function addTagTransp()
@@ -995,6 +1002,7 @@ final class Make
         }
         if (empty($this->infNFe)) {
             $this->errors[] = 'Falta a tag "infNFe"';
+
             return;
         }
         $this->addTag($this->transp, $this->transporta ?? null);
@@ -1028,25 +1036,29 @@ final class Make
     }
 
     /**
-     * Adiciona a tag pag a infNFe
+     * Adiciona a tag pag a infNFe.
+     *
      * @return void
      */
     protected function addTagPag()
     {
         if (empty($this->pag)) {
             $this->errors[] = 'Falta a tag "pag" OBRIGATÓRIA';
+
             return;
         }
         if (empty($this->aDetPag)) {
             $this->errors[] = 'Falta a tag "detPag" OBRIGATÓRIA';
+
             return;
         }
         if (empty($this->infNFe)) {
             $this->errors[] = 'Falta a tag "infNFe"';
+
             return;
         }
-        $node = !empty($this->pag->getElementsByTagName("vTroco")->item(0))
-            ? $this->pag->getElementsByTagName("vTroco")->item(0)
+        $node = !empty($this->pag->getElementsByTagName('vTroco')->item(0))
+            ? $this->pag->getElementsByTagName('vTroco')->item(0)
             : null;
         if (!empty($node)) {
             foreach ($this->aDetPag as $detPag) {
@@ -1061,7 +1073,8 @@ final class Make
     }
 
     /**
-     * Adiciona a tag cana a infNFe
+     * Adiciona a tag cana a infNFe.
+     *
      * @return void
      */
     protected function addTagCana()
@@ -1071,6 +1084,7 @@ final class Make
         }
         if (empty($this->aForDia)) {
             $this->errors[] = 'Falta a tag "forDia"';
+
             return;
         }
         if (count($this->aForDia) > 31) {
@@ -1078,6 +1092,7 @@ final class Make
         }
         if (empty($this->infNFe)) {
             $this->errors[] = 'Falta a tag "infNFe"';
+
             return;
         }
         $qTotMes = $this->cana->getElementsByTagName('qTotMes')->item(0) ?? null;
@@ -1101,15 +1116,17 @@ final class Make
     }
 
     /**
-     * Adiciona a tag agropacuario. Esta tag foi removida no PL_010
+     * Adiciona a tag agropacuario. Esta tag foi removida no PL_010.
+     *
      * @return void
+     *
      * @throws \DOMException
      */
     protected function addTagAgropecuario()
     {
-        //o schema estabelece qual PL está sendo usado para a montagem da NFe/NFCe
+        // o schema estabelece qual PL está sendo usado para a montagem da NFe/NFCe
         if ($this->schema < 10) {
-            //Esta tag não existe na PL_009
+            // Esta tag não existe na PL_009
             return;
         }
         if (!empty($this->agropecuarioGuia)) {
@@ -1130,8 +1147,10 @@ final class Make
     }
 
     /**
-     * Monta e adiciona a tag total na tag infNFe
+     * Monta e adiciona a tag total na tag infNFe.
+     *
      * @return void
+     *
      * @throws \DOMException
      */
     protected function addTagTotal()
@@ -1139,7 +1158,7 @@ final class Make
         $vNFTot = null;
         $identificador = 'W01 <total> -';
         $total = $this->dom->createElement('total');
-        //Grupo Totais referentes ao ICMS
+        // Grupo Totais referentes ao ICMS
         if (empty($this->dataICMSTot)) {
             $icms = [
                 'vBC' => null,
@@ -1175,11 +1194,11 @@ final class Make
         } else {
             $icms = $this->dataICMSTot;
         }
-        $this->buildTagICMSTot((object)$icms);
+        $this->buildTagICMSTot((object) $icms);
 
-        //Até 2036 esta tag deverá existir segundo a documentação atual da SEFAZ
+        // Até 2036 esta tag deverá existir segundo a documentação atual da SEFAZ
         $this->addTag($total, $this->ICMSTot);
-        //Grupo Totais referentes ao ISSQN
+        // Grupo Totais referentes ao ISSQN
         if (empty($this->ISSQNTot) && !empty($this->aISSQN)) {
             $iss = [
                 'vServ' => null,
@@ -1193,31 +1212,31 @@ final class Make
                 'vDescIncond' => null,
                 'vDescCond' => null,
                 'vISSRet' => null,
-                'cRegTrib' => null
+                'cRegTrib' => null,
             ];
-            $this->tagISSQNTot((object)$iss);
+            $this->tagISSQNTot((object) $iss);
         }
         $this->addTag($total, $this->ISSQNTot ?? null);
-        //Grupo Retenções de Tributos
+        // Grupo Retenções de Tributos
         if (!empty($this->retTrib)) {
             $this->addTag($total, $this->retTrib);
         }
         if ($this->schema > 9) {
-            //Totalizador do IS não foi criado e a flagIS é true
+            // Totalizador do IS não foi criado e a flagIS é true
             if (empty($this->ISTot) && $this->flagIS) {
-                //não foi informado o total do IS, obter do calculado
+                // não foi informado o total do IS, obter do calculado
                 $tis = [
-                    'vIS' => $this->stdIStot->vIS
+                    'vIS' => $this->stdIStot->vIS,
                 ];
-                $this->tagISTot((object)$tis);
+                $this->tagISTot((object) $tis);
             }
-            //existe a tag ISTot e a flagIS é true
+            // existe a tag ISTot e a flagIS é true
             if (!empty($this->ISTot) && $this->flagIS) {
                 $this->addTag($total, $this->ISTot);
             }
-            //Tag do Totalizador do IBSCBS não criada e flagIBSCBS é true
+            // Tag do Totalizador do IBSCBS não criada e flagIBSCBS é true
             if (empty($this->IBSCBSTot) && $this->flagIBSCBS) {
-                //não foi informado o total do IBSCBS, obter do calculado
+                // não foi informado o total do IBSCBS, obter do calculado
                 $ib = [
                     'vBCIBSCBS',
                     'gIBS_vIBS',
@@ -1241,20 +1260,20 @@ final class Make
                     'gMono_vIBSMonoRet',
                     'gMono_vCBSMonoRet',
                 ];
-                $this->tagIBSCBSTot((object)$ib);
+                $this->tagIBSCBSTot((object) $ib);
             }
-            //existe a tag IBSCBSTot e a flagIBSCBS é true
+            // existe a tag IBSCBSTot e a flagIBSCBS é true
             if (!empty($this->IBSCBSTot) && $this->flagIBSCBS) {
                 $this->addTag($total, $this->IBSCBSTot);
                 $vNFTotRecalculated = $this->reCalculateNFTotValue();
-                //add vNFTot informado ou calculado
+                // add vNFTot informado ou calculado
                 if (isset($this->stdTot->vNFTot)) {
                     if (empty($this->stdTot->vNFTot)) {
-                        $this->errors[] = "tag total - O valor de vNFTot não pode ser ZERO.";
+                        $this->errors[] = 'tag total - O valor de vNFTot não pode ser ZERO.';
                     } else {
                         $this->dom->addChild(
                             $total,
-                            "vNFTot",
+                            'vNFTot',
                             $this->conditionalNumberFormatting($this->stdTot->vNFTot, 2),
                             false,
                             "$identificador Valor total da NF-e com IBS / CBS / IS"
@@ -1263,7 +1282,7 @@ final class Make
                 } elseif (!empty($vNFTotRecalculated)) {
                     $this->dom->addChild(
                         $total,
-                        "vNFTot",
+                        'vNFTot',
                         $this->conditionalNumberFormatting($vNFTotRecalculated, 2),
                         false,
                         "$identificador Valor total da NF-e com IBS / CBS / IS"
@@ -1275,10 +1294,12 @@ final class Make
     }
 
     /**
-     * Adiciona tag filhas a tag Pai
-     * @param DOMElement|null $parent
-     * @param DOMElement|null $child
-     * @param string $msg
+     * Adiciona tag filhas a tag Pai.
+     *
+     * @param \DOMElement|null $parent
+     * @param \DOMElement|null $child
+     * @param string           $msg
+     *
      * @return void
      */
     protected function addTag(&$parent = null, $child = null, $msg = '')
@@ -1288,9 +1309,10 @@ final class Make
         }
         if (empty($parent)) {
             if (empty($msg)) {
-                $msg = "ERRO parent null no método addTag()";
+                $msg = 'ERRO parent null no método addTag()';
             }
             $this->errors[] = $msg;
+
             return;
         }
         $this->dom->appChild($parent, $child, $msg);
@@ -1299,28 +1321,28 @@ final class Make
     /**
      * Tag raiz da NFe
      * tag NFe DOMNode
-     * Função chamada pelo método [ render ]
-     * @return DOMElement
+     * Função chamada pelo método [ render ].
+     *
      * @throws \DOMException
      */
-    protected function buildNFe(): DOMElement
+    protected function buildNFe(): \DOMElement
     {
         if (empty($this->NFe)) {
-            $this->NFe = $this->dom->createElement("NFe");
-            $this->NFe->setAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe");
+            $this->NFe = $this->dom->createElement('NFe');
+            $this->NFe->setAttribute('xmlns', 'http://www.portalfiscal.inf.br/nfe');
         }
+
         return $this->NFe;
     }
 
     /**
      * Includes missing or unsupported properties in stdClass
      * Convert all properties of object in lower case
-     * Replace all unsuported chars from data
-     * @param stdClass $std
+     * Replace all unsuported chars from data.
+     *
      * @param string[] $possible
-     * @return stdClass
      */
-    protected function equilizeParameters(stdClass $std, array $possible): stdClass
+    protected function equilizeParameters(\stdClass $std, array $possible): \stdClass
     {
         $ppl = array_map('strtolower', $possible);
         $std = self::propertiesToLower($std);
@@ -1329,37 +1351,34 @@ final class Make
             $ppl,
             $this->replaceAccentedChars
         );
+
         return self::propertiesToBack($equalized, $possible);
     }
 
     /**
-     * Change properties names of object to lower case
-     * @param stdClass $data
-     * @return stdClass
+     * Change properties names of object to lower case.
      */
-    protected static function propertiesToLower(stdClass $data): stdClass
+    protected static function propertiesToLower(\stdClass $data): \stdClass
     {
         $properties = get_object_vars($data);
-        $clone = new stdClass();
+        $clone = new \stdClass();
         foreach ($properties as $key => $value) {
-            if ($value instanceof stdClass) {
+            if ($value instanceof \stdClass) {
                 $value = self::propertiesToLower($value);
             }
             $nk = trim(strtolower($key));
             $clone->{$nk} = $value;
         }
+
         return $clone;
     }
 
     /**
-     * Return properties do original name
-     * @param stdClass $data
-     * @param array $possible
-     * @return stdClass
+     * Return properties do original name.
      */
-    protected static function propertiesToBack(stdClass $data, array $possible): stdClass
+    protected static function propertiesToBack(\stdClass $data, array $possible): \stdClass
     {
-        $new = new stdClass();
+        $new = new \stdClass();
         $properties = get_object_vars($data);
         foreach ($properties as $key => $value) {
             foreach ($possible as $p) {
@@ -1369,20 +1388,21 @@ final class Make
                 }
             }
         }
+
         return $new;
     }
 
     /**
-     * Formatação numerica condicional
+     * Formatação numerica condicional.
+     *
      * @param string|float|int|null $value
-     * @param int $decimal
-     * @return string|null
      */
     protected function conditionalNumberFormatting($value = null, int $decimal = 2): ?string
     {
         if (is_numeric($value)) {
             return number_format($value, $decimal, '.', '');
         }
+
         return null;
     }
 }
