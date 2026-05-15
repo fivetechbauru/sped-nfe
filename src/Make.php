@@ -244,6 +244,7 @@ final class Make
         $this->stdTot->vBC = 0;
         $this->stdTot->vICMS = 0;
         $this->stdTot->vICMSDeson = 0;
+        $this->stdTot->vICMSDesonDeduzido = 0;
         $this->stdTot->vFCPUFDest = 0;
         $this->stdTot->vICMSUFDest = 0;
         $this->stdTot->vICMSUFRemet = 0;
@@ -845,6 +846,7 @@ final class Make
         $this->stdTot->vBC = round($this->stdTot->vBC, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vICMS = round($this->stdTot->vICMS, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vICMSDeson = round($this->stdTot->vICMSDeson, 2, PHP_ROUND_HALF_UP);
+        $this->stdTot->vICMSDesonDeduzido = round($this->stdTot->vICMSDesonDeduzido, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vFCP = round($this->stdTot->vFCP, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vFCPUFDest = round($this->stdTot->vFCPUFDest, 2, PHP_ROUND_HALF_UP);
         $this->stdTot->vICMSUFDest = round($this->stdTot->vICMSUFDest, 2, PHP_ROUND_HALF_UP);
@@ -868,7 +870,7 @@ final class Make
 
         $this->stdTot->vNF = $this->stdTot->vProd
             - $this->stdTot->vDesc
-            - $this->stdTot->vICMSDeson * $this->indDeduzDeson
+            - $this->stdTot->vICMSDesonDeduzido
             + $this->stdTot->vST
             + $this->stdTot->vFCPST
             + $this->stdTot->vICMSMonoReten
