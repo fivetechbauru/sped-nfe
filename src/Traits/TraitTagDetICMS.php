@@ -91,9 +91,9 @@ trait TraitTagDetICMS
         ];
         $std = $this->equilizeParameters($std, $possible);
         $identificador = "N01 ICMSxx Item: $std->item -";
-        // if (isset($std->indDeduzDeson)) {
-        $this->indDeduzDeson = $std->indDeduzDeson ?? 0;
-        //}
+        if (isset($std->indDeduzDeson)) {
+            $this->indDeduzDeson = $std->indDeduzDeson ?? 0;
+        }
         $icms = null;
         switch ($std->CST) {
             case '00':
@@ -437,11 +437,10 @@ trait TraitTagDetICMS
                 }
                 break;
             case '20':
-                $this->stdTot->vICMSDeson += (float) (!empty($std->vICMSDeson) && $std->indDeduzDeson === 1 ? $std->vICMSDeson : 0);
+                $this->stdTot->vICMSDeson += (float)!empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
                 $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
                 $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
                 $this->stdTot->vFCP += (float) !empty($std->vFCP) ? $std->vFCP : 0;
-                $this->stdTot->v
                 //dados calculo vItem
                 $this->aVItem[$std->item]['indDeduzDeson'] = ($std->indDeduzDeson ?? 0);
                 $this->aVItem[$std->item]['vICMSDeson'] = ($std->vICMSDeson ?? 0);
@@ -543,7 +542,7 @@ trait TraitTagDetICMS
                 );
                 break;
             case '30':
-                $this->stdTot->vICMSDeson += (float) (!empty($std->vICMSDeson) && $std->indDeduzDeson === 1 ? $std->vICMSDeson : 0);
+                $this->stdTot->vICMSDeson += (float)!empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
                 $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
                 $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
                 $this->stdTot->vFCPST += (float) !empty($std->vFCPST) ? $std->vFCPST : 0;
@@ -659,7 +658,7 @@ trait TraitTagDetICMS
             case '40':
             case '41':
             case '50':
-                $this->stdTot->vICMSDeson += (float)(!empty($std->vICMSDeson) && $std->indDeduzDeson === 1 ? $std->vICMSDeson : 0);
+                $this->stdTot->vICMSDeson += (float)!empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
                 //dados calculo vItem
                 $this->aVItem[$std->item]['indDeduzDeson'] = ($std->indDeduzDeson ?? 0);
                 $this->aVItem[$std->item]['vICMSDeson'] = ($std->vICMSDeson ?? 0);
@@ -1040,7 +1039,7 @@ trait TraitTagDetICMS
                 );
                 break;
             case '70':
-                $this->stdTot->vICMSDeson += (float) (!empty($std->vICMSDeson) && $std->indDeduzDeson ? $std->vICMSDeson : 0);
+                $this->stdTot->vICMSDeson += (float) !empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
                 $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
                 $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
                 $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
@@ -1228,7 +1227,7 @@ trait TraitTagDetICMS
                 );
                 break;
             case '90':
-                $this->stdTot->vICMSDeson += (float) (!empty($std->vICMSDeson) && $std->indDeduzDeson === 1 ? $std->vICMSDeson : 0);
+                $this->stdTot->vICMSDeson += (float) !empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
                 $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
                 $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
                 $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
